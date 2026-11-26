@@ -5,7 +5,12 @@ import { createObserveModule } from '@nestjs/observe';
 import { AppController } from './app.controller.js';
 import { AppService } from './app.service.js';
 import { AuthModule } from './auth/auth.module.js';
+import { ProductosModule } from './productos/productos.module.js';
+import { VentasModule } from './ventas/ventas.module.js';
+import { SeedModule } from './seed/seed.module.js';
 import { User } from './users/user.entity.js';
+import { Producto } from './productos/producto.entity.js';
+import { Venta } from './ventas/venta.entity.js';
 
 export const { ObserveModule, ObserveInstrument } = createObserveModule();
 
@@ -19,7 +24,7 @@ export const { ObserveModule, ObserveInstrument } = createObserveModule();
       username: process.env.DB_USER ?? 'root',
       password: process.env.DB_PASSWORD ?? '',
       database: process.env.DB_NAME ?? 'preprivado_db',
-      entities: [User],
+      entities: [User, Producto, Venta],
       synchronize: true,
     }),
     ObserveModule.forRoot({
@@ -28,6 +33,9 @@ export const { ObserveModule, ObserveInstrument } = createObserveModule();
       serviceId: 'preprivadoapi',
     }),
     AuthModule,
+    ProductosModule,
+    VentasModule,
+    SeedModule,
   ],
   controllers: [AppController],
   providers: [AppService],

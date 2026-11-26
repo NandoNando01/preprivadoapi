@@ -1,0 +1,1 @@
+export { Venta } from './venta.entity.js';
